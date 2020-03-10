@@ -30,3 +30,10 @@ pre-commit install
 ```
 
 Now pre-commit hooks should run on `git commit`.
+
+## Running the analysis
+This app downloads time series data from the Quandl API and performs ARIMA analysis upon this data. To run the analysis and generate predictions in the form of a numpy binary file run the following in your terminal
+
+```bash
+python -m generate_predictions
+```
