@@ -1,5 +1,5 @@
 # profit-analysis-backend
-This repo contains the data analysis for WIT intermediate oil using the ARIMA time series analysis model. It also serves a RESTful API to package the predicted data and profit analysis carried out by the app.
+This repo contains the data analysis for WIT intermediate oil prices using the ARIMA time series analysis model. It generates compressed files containing the predicted data and assessed boolean value for whether to sell today.
 
 ## Installation
 Once you have cloned down this repository using `git clone` cd into the app directory eg.
