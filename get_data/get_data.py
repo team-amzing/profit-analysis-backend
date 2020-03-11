@@ -2,7 +2,10 @@
 WIT oil price data is acquired from the Quandl API for use by the data_analysis module.
 """
 
+import requests
 import quandl
+
+from bs4 import BeautifulSoup
 
 # API key for Michael's account
 API_KEY = "NszGhwY_Qh8Ubj1BWhVt"
@@ -20,3 +23,14 @@ def call_api(n_days):
     # Get data from the quandl api, then only return the number of days asked for
     data = quandl.get("EIA/PET_RWTC_D", returns="numpy")
     return data[-n_days:]
+
+
+def get_current_value():
+    """Webscraper to return the current market value for WTI oil."""
+
+    page = requests.get(
+        "https://markets.businessinsider.com/commodities/oil-price?type=wti"
+    )
+    soup = BeautifulSoup(page.text, "html.parser")
+    current_prices = soup.find(class_="push-data")
+    return current_prices.next
