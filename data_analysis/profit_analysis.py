@@ -14,11 +14,11 @@ def sell_function(data_points, n_days, stock, daily_costs):
     # And compares it with the highest profit so far.
     count = 1
     best_profit = 0
-    price = prediction_df.iloc[0]["Prediction"]
+    price = prediction_df.iloc[0]["predicted_value"]
     pot_profit = stock * price
     profit_array = [pot_profit]
     while count < n_days:
-        price = prediction_df.iloc[count]["Prediction"]
+        price = prediction_df.iloc[count]["predicted_value"]
         profit = stock * price - daily_costs * count
         profit_array.append(profit)
         if pot_profit < profit:
@@ -42,7 +42,6 @@ def calculate_profit_margin(n_days, n_predictions, stock, daily_costs):
     # Use pandas apply method to add a new column to the data frame populated
     # based on existing rows in the table
     predictions["profit_margin"] = predictions.apply(
-        lambda row: row.Prediction * stock - daily_costs, axis=1
+        lambda row: row.predicted_value * stock - daily_costs, axis=1
     )
-
     return predictions

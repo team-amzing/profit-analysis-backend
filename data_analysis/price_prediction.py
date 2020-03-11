@@ -15,12 +15,15 @@ def model_arima(n_days, n_predictions):
 
     data = call_api(n_days)
     df = pd.DataFrame(data)
-
-    df = df.drop("Date", axis=1)
-
     model = ARIMA(df[["Value"]], order=(1, 1, 1))
     fitted = model.fit(disp=0)
 
     # Forecast, standard error, confidence region for a confidence of 95%
     forecast, error, conf = fitted.forecast(n_predictions, alpha=0.05)
-    return pd.DataFrame(data={"Prediction": forecast, "Error": error})
+    return pd.DataFrame(
+        data={
+            "date": df.Date[:n_predictions],
+            "predicted_value": forecast,
+            "error": error,
+        }
+    )

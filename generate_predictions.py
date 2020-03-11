@@ -1,3 +1,6 @@
+"""Script to run the ARIMA analysis and calculate a given number of predictions
+and the profit margin for that day, exported as a .npy file."""
+
 from numpy import save
 
 from data_analysis.profit_analysis import calculate_profit_margin
@@ -14,7 +17,6 @@ PREDICTED_DAYS = 7
 predictions = calculate_profit_margin(
     TRAINING_DAYS, PREDICTED_DAYS, OIL_STOCK, TANKER_DAILY_COSTS
 )
-predictions_array = predictions.to_numpy()
 
-# Save numpy array to file
-save("predictions.npy", predictions_array)
+# Save data frame as pickle file
+predictions.to_pickle("./predictions.pkl")
