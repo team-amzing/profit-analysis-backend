@@ -12,7 +12,7 @@ PREDICTED_DAYS = 7
 sell_today, predictions = sell_today(TRAINING_DAYS, PREDICTED_DAYS)
 
 # Save boolean value to numpy file
-save("sell_today.npy", [sell_today])
+save("sell_today.npy", sell_today)
 
 # Save data frame as pickle file
 predictions.to_pickle("./predictions.pkl")

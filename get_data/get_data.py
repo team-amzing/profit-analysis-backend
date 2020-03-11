@@ -33,4 +33,4 @@ def get_current_value():
     )
     soup = BeautifulSoup(page.text, "html.parser")
     current_prices = soup.find(class_="push-data")
-    return current_prices.next
+    return float(str(current_prices.next))

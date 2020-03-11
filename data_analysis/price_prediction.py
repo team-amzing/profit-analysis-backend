@@ -3,10 +3,11 @@ Using the data imported from quandl in get_data the price is predicted
 with errors for the next five days, in increments of days.
 """
 
+from datetime import datetime
 import pandas as pd
 from statsmodels.tsa.arima_model import ARIMA
 
-from get_data.get_data import call_api
+from get_data.get_data import call_api, get_current_value
 
 
 def model_arima(n_days, n_predictions):
@@ -15,6 +16,13 @@ def model_arima(n_days, n_predictions):
 
     data = call_api(n_days)
     df = pd.DataFrame(data)
+
+    # If last date in data frame is not current date append
+    # data frame with current date and price
+    if datetime.now().date() > df.Date.iloc[-1].date():
+        df = df.append(
+            {"Date": datetime.now(), "Value": get_current_value()}, ignore_index=True
+        )
     model = ARIMA(df[["Value"]], order=(1, 1, 1))
     fitted = model.fit(disp=0)
 
