@@ -16,6 +16,7 @@ numpy = "==1.17.4"
 quandl = "==3.4.8"
 statsmodels = "==0.10.1"
 bs4 = "==0.0.1"
+tweepy = "==3.5.0"
 
 [requires]
 python_version = "3.7"
