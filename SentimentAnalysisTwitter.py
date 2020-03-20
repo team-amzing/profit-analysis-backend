@@ -5,6 +5,7 @@ import nltk
 nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import tweepy
+from tweepyTest import twitterAPI
 
 # keys, tokens and secrets
 CONSUMER_KEY = "5uZBofueiS8jKVhKXnpfr2MTN"
@@ -25,28 +26,7 @@ no_tweets = 1000
 new_search = "oil, price, WTI" + " -filter:retweets"
 
 
-def twitterAPI(api, no_tweets, new_search):
-    # collect tweets
-    tweets = tweepy.Cursor(api.search, q=new_search, lang="en").items(no_tweets)
 
-    # collect data from tweets
-    user_locs = [
-        [
-            tweet.text,
-            tweet.user.screen_name,
-            tweet.user.location,
-            tweet.favorite_count,
-            tweet.retweet_count,
-        ]
-        for tweet in tweets
-    ]
-    df = pd.DataFrame(
-        data=user_locs,
-        columns=["text", "user", "location", "like count", "retweet count"],
-    )
-    return df
-
-###
 def run():
     #Call the twitter method and store all tweets in a list
     StringArray = twitterAPI(api, no_tweets, new_search)['text'].values.tolist()
