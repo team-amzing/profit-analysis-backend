@@ -1,14 +1,13 @@
-FROM nginx
-MAINTAINER cot12@aber.ac.uk
+FROM python:3.7
 
+RUN mkdir /code
+WORKDIR code
 
-COPY start.sh /
+COPY . /code
+WORKDIR /code
 
-RUN apt update
-RUN apt -y install procps
-RUN chmod 777 /start.sh
+RUN pip install pipenv
+RUN pipenv install --system --deploy --ignore-pipfile
 
-#expose the web server port to outside the container
-EXPOSE 80/tcp
+ENTRYPOINT ["bash","/code/start.sh"]
 
-ENTRYPOINT ["bash","/start.sh"]

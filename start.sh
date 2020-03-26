@@ -1,5 +1,7 @@
 #!/bin/bash
-pipenv install
-p=$(pipenv --venv)
-source "$p/bin/activate"
-python -m generate_predictions
+
+while [ "0" = "0" ]; do
+  python /code/generate_predictions.py
+  sleep 3600
+done
+
