@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+  python:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: python3
+    container_name: python
+    volumes:
+      - .:/code/
+    command: >
+      bash -c "python generate_predictions.py"
