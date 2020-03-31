@@ -1,5 +1,5 @@
 FROM nginx
-MAINTAINER cot@aber.ac.uk
+MAINTAINER cot12@aber.ac.uk
 
 
 COPY start.sh /
