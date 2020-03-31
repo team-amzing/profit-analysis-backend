@@ -43,3 +43,26 @@ If you are using Windows you will need to run
 ```bash
 python -m generate_predictions.py
 ```
+
+## Docker
+The above steps can be carried out with the docker-compose setup, which will also run a local server. This local server can be found at <localhost:8000> once the containers are running.
+
+The docker-compose setup consists of a Python and an NGINX container with a mounted volume `code`. To build the image and run the image, run the following:
+
+```bash
+docker-compose up --build
+```
+
+Once your container is built, you will be able to run it more quickly using:
+
+```bash
+docker-compose up
+```
+
+You can use `Ctrl C` to cancel out of the containers. Use `docker ps` to see which containers are running and to go into a container use the following command:
+
+```bash
+docker exec -it <container-name> bash
+```
+
+Be sure to have run `docker-compose up` before running this command as you will not be able to enter a container if it not active.
