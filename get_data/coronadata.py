@@ -9,8 +9,9 @@ outbreakDate = date(2020, 2, 21)
 today = date.today()
 days = (today - outbreakDate).days
 
-# Collect prices and normalise to see the overall effect on the stock
+
 def coronaData(days):
+  """Collect prices and normalise to see the overall effect on the stock"""
   histprices = call_api(days)
   df = pd.DataFrame(histprices)
   dfs = [df.set_index("Date")]
