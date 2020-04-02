@@ -6,7 +6,7 @@ for each prediction.
 
 def sell_today(value, predictions):
     """Returns a boolean value for to indicate whether to sell today."""
-    return value < max(predictions.predicted_value)
+    return value > max(predictions.predicted_value)
 
 
 def get_predictions(model, n_days, n_predictions, current_value):
