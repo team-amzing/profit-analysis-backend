@@ -25,12 +25,10 @@ def call_api(n_days):
     return data[-n_days:]
 
 
-def get_current_value():
+def get_current_value(url):
     """Webscraper to return the current market value for WTI oil."""
 
-    page = requests.get(
-        "https://markets.businessinsider.com/commodities/oil-price?type=wti"
-    )
+    page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
     current_prices = soup.find(class_="push-data")
     return float(str(current_prices.next))
