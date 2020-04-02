@@ -5,7 +5,7 @@ from numpy import save
 
 from data_analysis.price_prediction import model_arima
 from data_analysis.profit_analysis import get_predictions
-
+from get_data.get_data import get_current_value
 
 # Model choice for analysis
 MODEL = model_arima
@@ -17,7 +17,12 @@ PREDICTED_DAYS = 7
 # URL for scraping the current value
 URL = "https://markets.businessinsider.com/commodities/oil-price?type=wti"
 
-sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, URL)
+# Current value of oil
+VALUE = get_current_value(URL)
+
+sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE)
+
+import ipdb; ipdb.set_trace(context=25)
 
 # Save boolean value to numpy file
 save("sell_today.npy", sell_today)
