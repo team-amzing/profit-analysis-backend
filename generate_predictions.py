@@ -22,7 +22,6 @@ VALUE = get_current_value(URL)
 
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE)
 
-import ipdb; ipdb.set_trace(context=25)
 
 # Save boolean value to numpy file
 save("sell_today.npy", sell_today)
