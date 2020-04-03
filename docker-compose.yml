@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  python:
+    build:
+      context: ./
+      dockerfile: Dockerfile-python
+    image: python3
+    container_name: python
+    volumes:
+      - .:/code/
+    command: >
+      bash -c "while [ "0" = "0" ] ; do
+                  python /code/main.py
+                  sleep 3600
+                done"
+  nginx:
+    build:
+      context: ./
+      dockerfile: Dockerfile-nginx
+    image: nginx
+    container_name: nginx
+    expose:
+      - 80
+    ports:
+      - 8000:80
+    volumes:
+      - .:/code/
+
