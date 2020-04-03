@@ -20,7 +20,10 @@ URL = "https://markets.businessinsider.com/commodities/oil-price?type=wti"
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, URL)
 
 # Save boolean value to numpy file
-save("sell_today.npy", sell_today)
+# save("sell_today.npy", sell_today)
+
+with open("sell_today.txt", "w+") as file:
+    file.write(str(sell_today))
 
 # Save data frame as pickle file
 predictions.to_pickle("./predictions.pkl")
