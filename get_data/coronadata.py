@@ -5,9 +5,10 @@ import requests
 from get_data.get_data import call_api
 
 # Date from the day before the outbreak in italy
-outbreakDate = date(2020, 2, 21)
-today = date.today()
-days = (today - outbreakDate).days
+def get_days():
+    outbreakDate = date(2020, 2, 21)
+    today = date.today()
+    return (today - outbreakDate).days
 
 
 def coronaData(days):
@@ -16,5 +17,5 @@ def coronaData(days):
   df = pd.DataFrame(histprices)
   dfs = [df.set_index("Date")]
   histpriceNormalised = pd.concat(dfs, axis=1)
-  return histpriceNormalised = histpriceNormalised / histpriceNormalised.iloc[0]
+  return histpriceNormalised / histpriceNormalised.iloc[0], histpriceNormalised.iloc[0]
 
