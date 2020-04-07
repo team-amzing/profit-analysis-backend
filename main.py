@@ -14,6 +14,10 @@ MODEL = model_arima
 TRAINING_DAYS = 2000
 PREDICTED_DAYS = 7
 
+# Constants for vessel information
+UNITS = 750000
+COST = 30000
+
 # URL for scraping the current value
 URL = "https://markets.businessinsider.com/commodities/oil-price?type=wti"
 
@@ -22,8 +26,7 @@ VALUE = get_current_value(URL)
 
 date_today = date.today()
 
-sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE)
-
+sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST)
 
 html_string = f"""
     <h1 >WTI Oil Price Prediction for {date_today}</h1>
