@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.optimize import least_squares
-import matplotlib.pyplot as plt
 
 from get_data.coronadata import get_days, coronaData
 
@@ -35,7 +34,4 @@ def covid_pred(days, data_value, outbreakValue):
         fun, x0, loss="soft_l1", f_scale=0.1, args=(x_train, data_value)
     )
     y_reg = generate_data(x_reg, *res.x)  # prediction
-    plt.plot(x_train, data_value, "o")
-    plt.plot(x_reg, y_reg)
-    plt.show()
     return y_reg[-1] * outbreakValue
