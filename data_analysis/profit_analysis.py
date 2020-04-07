@@ -4,10 +4,10 @@ for each prediction.
 """
 
 
-def sell_today(value, predictions, no_units, daily_cost):
+def sell_today(value_today, value_tomorrow, no_units, daily_cost):
     """Returns a boolean value for to indicate whether to sell today."""
-    profit_today = value * no_units
-    profit_tomorrow = (predictions.predicted_value[0] * no_units) - daily_cost
+    profit_today = value_today * no_units
+    profit_tomorrow = (value_tomorrow * no_units) - daily_cost
 
     return profit_today > profit_tomorrow
 
@@ -16,5 +16,6 @@ def get_predictions(model, n_days, n_predictions, current_value, no_units, daily
     """Returns the predictions from a given model and a comparison between the best predicted value and
     the current value."""
     predictions = model(n_days, n_predictions, current_value)
-    return sell_today(current_value, predictions, no_units, daily_cost), predictions
+    next_value = predictions.predicted_value[0]
+    return sell_today(current_value, next_value, no_units, daily_cost), predictions
 

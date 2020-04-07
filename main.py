@@ -14,7 +14,7 @@ MODEL = model_arima
 TRAINING_DAYS = 2000
 PREDICTED_DAYS = 7
 
-# set variables
+# Constants for vessel information
 UNITS = 750000
 COST = 30000
 
