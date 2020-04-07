@@ -30,7 +30,7 @@ def model_arima(n_days, n_predictions, current_value):
     # Forecast, standard error, confidence region for a confidence of 95%
     forecast, error, conf = fitted.forecast(n_predictions, alpha=0.05)
 
-    dates = [current_time + timedelta(days=day) for day in range(1, n_predictions + 1)]
+    dates = [current_time.date() + timedelta(days=day) for day in range(1, n_predictions + 1)]
 
     return pd.DataFrame(
         data={

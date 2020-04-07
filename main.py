@@ -29,9 +29,10 @@ date_today = date.today()
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST)
 
 html_string = f"""
-    <h1 >WTI Oil Price Prediction for {date_today}</h1>
-    <h2 >Should you sell today? {sell_today}</h2>
-    <p>{(predictions.to_string(header=True, index=False))}</p>
+    <h1>WTI Oil Price Prediction for {date_today}</h1>
+    <h2>Oil price today: {VALUE}</h2>
+    {predictions.to_html(index=False)}
+    <h2>Should you sell today? {sell_today}</h2>
 """
 
 with open("index.html", "w") as file:
