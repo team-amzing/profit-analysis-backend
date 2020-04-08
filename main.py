@@ -31,7 +31,7 @@ sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, 
 html_string = f"""
     <h1>WTI Oil Price Prediction for {date_today}</h1>
     <h2>Oil price today: {VALUE}</h2>
-    {predictions.to_html(index=False)}
+    {predictions.to_html()}
     <h2>Should you sell today? {sell_today}</h2>
 """
 
