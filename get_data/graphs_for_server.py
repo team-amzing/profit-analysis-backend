@@ -1,0 +1,85 @@
+import numpy as np
+import pandas as pd
+import matplotlib
+from matplotlib import pyplot as plt
+
+
+def plot_to_file(filename, predictions, sell_today, todays_price):
+    """
+    Reads a pandas dataframe with all dates as datetime objects(!), and returns an .SVG
+    that contains the predicted values for the next few days, along with the profit
+    one can expect if one waited until that day (as costs go up daily).
+    filename does not need to contain the .svg file extension.
+    """
+    # Read in files
+    SERVER_URL = "http://35.204.193.240/"
+    n_predictions = len(predictions.index)
+
+    # Window setup
+    tomorrows_price = predictions["predicted_value"][1]
+    difference = str(tomorrows_price - todays_price)
+
+    # Calculate axis labels
+    cost_per_barrel_to_not_sell = (
+        0.1
+    )  ## The cost of running the ship for a day, not the real value yet
+    date_strings = [[]] * n_predictions
+    gross_labels = []
+    profit_labels = []
+    colours = (
+        []
+    )  # Uses red and green to indicate if a day is predicted to be a profit or loss
+    for index in range(n_predictions):
+        date_strings[index] = (
+            predictions["date"].values[index].strftime("%m-%d")
+        )  # Took %Y, year, out
+        gross_labels.append(
+            str(format(predictions["predicted_value"].values[index], ".2f"))
+        )
+        profit_labels.append(
+            str(
+                format(
+                    predictions["predicted_value"].values[index]
+                    - todays_price
+                    - cost_per_barrel_to_not_sell * (index + 1),
+                    ".2f",
+                )
+            )
+        )  # index+1 is the number of days ahead we are predicting
+        if float(profit_labels[index]) < 0:
+            colours.append("red")
+        else:
+            colours.append("green")
+
+    font = {"family": "serif", "weight": "normal", "size": 12}
+
+    matplotlib.rc("font", **font)
+
+    ## Formatting
+
+    pix_per_inch = 96  # Number of pixels per inch to create the figure size
+    fig = plt.figure(
+        figsize=(380 / pix_per_inch, 200 / pix_per_inch)
+    )  # This takes inches as arguements
+    ax1 = fig.add_subplot(111)  # This just allows more freedom using ax. not plt.
+    plt.subplots_adjust(
+        left=0.22, bottom=0.3
+    )  # Add extra room to ensure graph fits fine
+    ax1.set_xticks(np.arange(0, n_predictions))
+    ax1.set_xticklabels(date_strings, rotation=45, ha="right", rotation_mode="anchor")
+    plt.suptitle("Next week's outlook")
+    ax1.set_ylabel("USD", rotation=90, ha="right", rotation_mode="anchor")
+    plt.grid()
+    ax1.spines["top"].set_visible(False)
+    ax1.spines["right"].set_visible(False)
+    # Annotate each point with the profit you'd make right now compared to waiting for this day
+    x = np.arange(0, n_predictions)
+    y = predictions["predicted_value"].values
+    for i, j in zip(x, y):
+        ax1.text(
+            i, j, profit_labels[i], fontsize=8, color=colours[i], fontweight="bold"
+        )
+
+    ## Adding values
+    ax1.plot(x, y, color="black", linewidth=3)
+    plt.savefig(f"{filename}.svg", format="svg")
