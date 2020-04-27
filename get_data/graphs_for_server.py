@@ -1,6 +1,6 @@
+import matplotlib
 import numpy as np
 import pandas as pd
-import matplotlib
 from matplotlib import pyplot as plt
 
 
@@ -33,19 +33,10 @@ def plot_to_file(filename, predictions, sell_today, todays_price):
         date_strings[index] = (
             predictions["date"].values[index].strftime("%m-%d")
         )  # Took %Y, year, out
-        gross_labels.append(
-            str(format(predictions["predicted_value"].values[index], ".2f"))
-        )
+        gross_labels.append(f'{predictions["predicted_value"].values[index]:.2f}')
         profit_labels.append(
-            str(
-                format(
-                    predictions["predicted_value"].values[index]
-                    - todays_price
-                    - cost_per_barrel_to_not_sell * (index + 1),
-                    ".2f",
-                )
-            )
-        )  # index+1 is the number of days ahead we are predicting
+            f'{predictions["predicted_value"].values[index] - todays_price - cost_per_barrel_to_not_sell * (index + 1):.2f}'
+        )
         if float(profit_labels[index]) < 0:
             colours.append("red")
         else:
