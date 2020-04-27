@@ -34,8 +34,6 @@ sell_today, predictions = get_predictions(
 # Generate a plot and table for the server
 plot_to_file("projection", predictions, sell_today, VALUE)
 
-# Still need a line to include this on the server!
-
 html_string = f"""
     <h1>WTI Oil Price Prediction for {date_today}</h1>
     <h2>Oil price today: {VALUE}</h2>
