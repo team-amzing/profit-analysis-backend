@@ -4,7 +4,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 
-def plot_to_file(filename, predictions, sell_today, todays_price):
+def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions):
     """
     Reads a pandas dataframe with all dates as datetime objects(!), and returns an .SVG
     that contains the predicted values for the next few days, along with the profit
@@ -13,16 +13,12 @@ def plot_to_file(filename, predictions, sell_today, todays_price):
     """
     # Read in files
     SERVER_URL = "http://35.204.193.240/"
-    n_predictions = len(predictions.index)
 
     # Window setup
     tomorrows_price = predictions["predicted_value"][1]
     difference = str(tomorrows_price - todays_price)
 
     # Calculate axis labels
-    cost_per_barrel_to_not_sell = (
-        0.1
-    )  ## The cost of running the ship for a day, not the real value yet
     date_strings = [[]] * n_predictions
     gross_labels = []
     profit_labels = []
@@ -34,13 +30,6 @@ def plot_to_file(filename, predictions, sell_today, todays_price):
             predictions["date"].values[index].strftime("%m-%d")
         )  # Took %Y, year, out
         gross_labels.append(f'{predictions["predicted_value"].values[index]:.2f}')
-        profit_labels.append(
-            f'{predictions["predicted_value"].values[index] - todays_price - cost_per_barrel_to_not_sell * (index + 1):.2f}'
-        )
-        if float(profit_labels[index]) < 0:
-            colours.append("red")
-        else:
-            colours.append("green")
 
     font = {"family": "serif", "weight": "normal", "size": 12}
 
@@ -66,10 +55,6 @@ def plot_to_file(filename, predictions, sell_today, todays_price):
     # Annotate each point with the profit you'd make right now compared to waiting for this day
     x = np.arange(0, n_predictions)
     y = predictions["predicted_value"].values
-    for i, j in zip(x, y):
-        ax1.text(
-            i, j, profit_labels[i], fontsize=8, color=colours[i], fontweight="bold"
-        )
 
     ## Adding values
     ax1.plot(x, y, color="black", linewidth=3)
