@@ -13,7 +13,7 @@ MODEL = model_arima
 
 # Constants for model parameters
 TRAINING_DAYS = 2000
-PREDICTED_DAYS = 7
+PREDICTED_DAYS = 9
 
 # Constants for vessel information
 UNITS = 750000
