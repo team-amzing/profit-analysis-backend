@@ -39,7 +39,7 @@ python main.py
 ```
 
 ## Docker
-The above steps can be carried out with the docker-compose setup, which will also run a local server. This local server can be found at <localhost:8000> once the containers are running.
+The above steps can be carried out with the docker-compose setup, which will also run a local server. This local server can be found at <localhost> once the containers are running.
 
 The docker-compose setup consists of a Python and an NGINX container with a mounted volume `code`. To build the image and run the image, run the following:
 

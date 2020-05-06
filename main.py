@@ -1,5 +1,6 @@
 """Script to run the ARIMA analysis and calculate a given number of predictions
 and the profit margin for that day, exported as a .npy file."""
+<<<<<<< HEAD
 import sys
 import os
 from numpy import save
@@ -15,13 +16,26 @@ file = os.path.join(THIS_FOLDER, 'get_data/macrotrends_data.csv')
 
 #Add todays oil price data to the csv
 addTodaysDateToMacrotrends(file)
+=======
+
+from datetime import date
+
+from data_analysis.price_prediction import model_arima
+from data_analysis.profit_analysis import get_predictions
+from get_data.get_data import get_current_value
+from get_data.graphs_for_server import plot_to_file
+>>>>>>> db71eb3c1b603912253640000363a15d5be86791
 
 # Model choice for analysis
 MODEL = model_arima
 
 # Constants for model parameters
 TRAINING_DAYS = 2000
-PREDICTED_DAYS = 7
+PREDICTED_DAYS = 9
+
+# Constants for vessel information
+UNITS = 750000
+COST = 30000
 
 #Constants for vessel information
 UNITS = 750000
@@ -35,13 +49,28 @@ VALUE = get_current_value(URL)
 
 date_today = date.today()
 
+<<<<<<< HEAD
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST)
+=======
+sell_today, predictions = get_predictions(
+    MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST
+)
+
+# Generate a plot and table for the server
+plot_to_file("projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
+>>>>>>> db71eb3c1b603912253640000363a15d5be86791
 
 html_string = f"""
     <h1>WTI Oil Price Prediction for {date_today}</h1>
     <h2>Oil price today: {VALUE}</h2>
     {predictions.to_html()}
+<<<<<<< HEAD
     <h2>Should you sell today? {sell_today}</h2>"""
+=======
+    <h2>Should you sell today? {sell_today}</h2>
+    <img src="projection.svg" height="500" width ="265" alt="Projection plot missing" >
+"""
+>>>>>>> db71eb3c1b603912253640000363a15d5be86791
 
 with open("index.html", "w") as file:
     file.write(html_string)
