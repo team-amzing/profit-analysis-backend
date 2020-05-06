@@ -6,6 +6,7 @@ from datetime import date
 from data_analysis.price_prediction import model_arima
 from data_analysis.profit_analysis import get_predictions
 from get_data.get_data import get_current_value
+from get_data.graphs_for_server import plot_to_file
 
 # Model choice for analysis
 MODEL = model_arima
@@ -26,13 +27,19 @@ VALUE = get_current_value(URL)
 
 date_today = date.today()
 
-sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST)
+sell_today, predictions = get_predictions(
+    MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST
+)
+
+# Generate a plot and table for the server
+plot_to_file("projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
 
 html_string = f"""
     <h1>WTI Oil Price Prediction for {date_today}</h1>
     <h2>Oil price today: {VALUE}</h2>
     {predictions.to_html()}
     <h2>Should you sell today? {sell_today}</h2>
+    <img src="projection.svg" height="500" width ="265" alt="Projection plot missing" >
 """
 
 with open("index.html", "w") as file:
