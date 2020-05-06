@@ -12,7 +12,7 @@ from statsmodels.tsa.arima_model import ARIMA
 from get_data.importData import call_macro
 #from get_data.get_data import call_api
 
-file = open('../get_data/macrotrends_data.csv', 'r')
+file = open('./get_data/macrotrends_data.csv', 'r')
 
 def model_arima(n_days, n_predictions, current_value):
     """Returns an array of predicted prices for given number of days using
