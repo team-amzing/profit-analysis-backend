@@ -17,11 +17,8 @@ quandl = "==3.4.8"
 statsmodels = "==0.10.1"
 bs4 = "==0.0.1"
 tweepy = "==3.5.0"
-<<<<<<< HEAD
 scipy = "*"
-=======
 pandas = "==1.0.3"
->>>>>>> db71eb3c1b603912253640000363a15d5be86791
-
+matplotlib = "==3.1.1"
 [requires]
 python_version = "3.7"
