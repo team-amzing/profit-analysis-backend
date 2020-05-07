@@ -9,18 +9,18 @@ file = os.path.join(THIS_FOLDER, 'macrotrends_data.csv')
 
 # Date from the day before the outbreak in italy
 def get_days():
-    outbreakDate = date(2020, 2, 21)
+    outbreak_date = date(2020, 2, 21)
     today = date.today()
-    return (today - outbreakDate).days
+    return (today - outbreak_date).days
 
 
-def coronaData(days):
+def corona_data(days):
   """Collect prices and normalise to see the overall effect on the stock"""
   histprices = call_macro(days, file)
   df = pd.DataFrame(histprices)
   dfs = [df.set_index("Date")]
-  histpriceNormalised = pd.concat(dfs, axis=1)
+  histprice_normalised = pd.concat(dfs, axis=1)
 
-  histpriceNormalised = (histpriceNormalised / histpriceNormalised.iloc[0])
-  print (histpriceNormalised)
-  return histpriceNormalised
+  histprice_normalised = (histprice_normalised / histprice_normalised.iloc[0])
+  print (histprice_normalised)
+  return histprice_normalised

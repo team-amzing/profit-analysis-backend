@@ -6,11 +6,7 @@ with errors for the next five days, in increments of days.
 from datetime import datetime, timedelta
 import pandas as pd
 from statsmodels.tsa.arima_model import ARIMA
-#import sys
-#import os
-#sys.path.append(os.path.abspath('../get_data'))
-from get_data.importData import call_macro
-#from get_data.get_data import call_api
+from get_data.import_data import call_macro
 
 file = open('./get_data/macrotrends_data.csv', 'r')
 
@@ -25,14 +21,6 @@ def model_arima(n_days, n_predictions, current_value):
     # If last date in data frame is not current date append
     # data frame with current date and price
     current_time = datetime.now()
-    #current_time_string = current_time.strftime('%d/%m/%Y')
-    #current_time_formatted = datetime.strptime(current_time_string, '%d/%m/%Y')
-    #last_date_on_csv_formatted = datetime.strptime(df['date'].iloc[-1], '%d/%m/%Y')
-    #if current_time_formatted > last_date_on_csv_formatted:
-    #    df = df.append(
-    #        {"date": current_time, "value": current_value}, ignore_index=True
-    #        )
-    #print ("This is what the fuck df is: ", df[['date', 'value']])
     model = ARIMA(df["value"], order=(1, 1, 1))
     fitted = model.fit(disp=0)
 
