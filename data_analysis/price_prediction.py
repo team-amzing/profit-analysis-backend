@@ -15,7 +15,6 @@ def model_arima(n_days, n_predictions, current_value):
     Quandl API data."""
 
     data = call_macro(n_days, file)
-    #data = call_api(n_days)
     df = pd.DataFrame(data)
 
     # If last date in data frame is not current date append
