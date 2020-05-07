@@ -28,7 +28,7 @@ def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions)
     for index in range(n_predictions):
         date_strings[index] = (
             pd.to_datetime(predictions["date"].values[index]).strftime("%m-%d")
-            predictions["date"][index].strftime("%m-%d")
+            #predictions["date"][index].strftime("%m-%d")
         )  # Took %Y, year, out
         gross_labels.append(f'{predictions["predicted_value"].values[index]:.2f}')
 
