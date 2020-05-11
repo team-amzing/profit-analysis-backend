@@ -27,7 +27,8 @@ def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions)
     )  # Uses red and green to indicate if a day is predicted to be a profit or loss
     for index in range(n_predictions):
         date_strings[index] = (
-            predictions["date"][index].strftime("%m-%d")
+            pd.to_datetime(predictions["date"].values[index]).strftime("%m-%d")
+            #predictions["date"][index].strftime("%m-%d")
         )  # Took %Y, year, out
         gross_labels.append(f'{predictions["predicted_value"].values[index]:.2f}')
 

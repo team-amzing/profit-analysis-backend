@@ -8,7 +8,6 @@ def sell_today(value_today, value_tomorrow, no_units, daily_cost):
     """Returns a boolean value for to indicate whether to sell today."""
     profit_today = value_today * no_units
     profit_tomorrow = (value_tomorrow * no_units) - daily_cost
-
     return profit_today > profit_tomorrow
 
 
