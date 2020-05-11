@@ -17,8 +17,6 @@ def model_arima(n_days, n_predictions, current_value):
     data = call_macro(n_days, file)
     df = pd.DataFrame(data)
 
-    # If last date in data frame is not current date append
-    # data frame with current date and price
     current_time = datetime.now()
     model = ARIMA(df["value"], order=(1, 1, 1))
     fitted = model.fit(disp=0)

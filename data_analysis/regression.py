@@ -1,12 +1,12 @@
 import numpy as np
 from scipy.optimize import least_squares
 
-from get_data.coronadata import get_days, coronaData
+from get_data.coronadata import get_days, corona_data
 
 # Get data
 days = get_days()
-data, outbreakValue = coronaData(days)
-outbreakValue = float(outbreakValue)
+data, outbreak_value = corona_data(days)
+outbreak_value = float(outbreak_value)
 data_value = list(data["Value"])
 
 
@@ -21,7 +21,7 @@ def generate_data(t, A, sigma, omega, noise=0, n_outliers=0, random_state=0):
 
 
 def fun(x, t, y):
-    """ function for computinf residuals for least square minimiation"""
+    """ function for computing residuals for least square minimiation"""
     return x[0] * np.exp(-x[1] * t) * np.sin(x[2] * t) - y
 
 
@@ -34,4 +34,4 @@ def covid_pred(days, data_value, outbreakValue):
         fun, x0, loss="soft_l1", f_scale=0.1, args=(x_train, data_value)
     )
     y_reg = generate_data(x_reg, *res.x)  # prediction
-    return y_reg[-1] * outbreakValue
+    return y_reg[-1] * outbreak_value

@@ -10,6 +10,7 @@ def sell_today(value_today, value_tomorrow, no_units, daily_cost):
     profit_tomorrow = (value_tomorrow * no_units) - daily_cost
     return profit_today > profit_tomorrow
 
+
 def get_predictions(model, n_days, n_predictions, current_value, no_units, daily_cost):
     """Returns the predictions from a given model and a comparison between the best predicted value and
     the current value."""

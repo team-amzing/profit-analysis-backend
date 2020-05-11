@@ -2,7 +2,7 @@ from datetime import date
 import pandas as pd
 import requests
 import os
-from importData import call_macro
+from import_data import call_macro
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 file = os.path.join(THIS_FOLDER, 'macrotrends_data.csv')
 
