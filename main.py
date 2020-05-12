@@ -67,4 +67,4 @@ with open("index.html", "w") as file:
     file.write(html_string)
   
 print(predictions)
-print(OUTBREAKVALUE)
+print(OUTBREAK_VALUE)
