@@ -47,11 +47,11 @@ date_today = date.today()
 
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST)
 # incooperate covid
-days = get_days()
-data, outbreak_value = corona_data(days)
-outbreak_value = float(outbreak_value)
-data_value = list(data["value"])
-num_covid = covid_pred(days, data_value, outbreak_value)
+COVID_DAYS = get_days()
+COVID_DATA, OUTBREAK_VALUE = corona_data(days)
+OUTBREAK_VALUE = float(OUTBREAK_VALUE)
+DATA_VALUES = list(COVID_DATA["value"])
+NUM_COVID = covid_pred(COVID_DAYS, DATA_VALUES, OUTBREAK_VALUE)
 # Generate a plot and table for the server
 plot_to_file("projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
 
@@ -67,4 +67,4 @@ with open("index.html", "w") as file:
     file.write(html_string)
   
 print(predictions)
-print(covid_pred)
+print(NUM_COVID)
