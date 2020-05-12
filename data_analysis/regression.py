@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.optimize import least_squares
 
-from get_data.coronadata import get_days, corona_data
+from get_data.corona_data import get_days, corona_data
 
 # Get data
 days = get_days()
