@@ -18,7 +18,7 @@ def corona_data(days):
   """Collect prices and normalise to see the overall effect on the stock"""
   histprices = call_macro(days, file)
   df = pd.DataFrame(histprices)
-  dfs = [df.set_index("Date")]
+  dfs = [df.set_index("date")]
   histprice_normalised = pd.concat(dfs, axis=1)
 
   histprice_normalised = (histprice_normalised / histprice_normalised.iloc[0])
