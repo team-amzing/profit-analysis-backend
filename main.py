@@ -21,6 +21,7 @@ from datetime import date
 from data_analysis.price_prediction import model_arima
 from data_analysis.profit_analysis import get_predictions
 from data_analysis.regression import covid_pred
+from get_data.corona_data import get_days, corona_data
 from get_data.get_data import get_current_value
 from get_data.graphs_for_server import plot_to_file
 
@@ -45,7 +46,12 @@ VALUE = get_current_value(URL)
 date_today = date.today()
 
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST)
-num_covid = covid_pred
+# incooperate covid
+days = get_days()
+data, outbreak_value = corona_data(days)
+outbreak_value = float(outbreak_value)
+data_value = list(data["value"])
+num_covid = covid_pred(days, data_value, outbreak_value)
 # Generate a plot and table for the server
 plot_to_file("projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
 
