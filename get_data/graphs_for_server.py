@@ -59,4 +59,4 @@ def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions)
 
     ## Adding values
     ax1.plot(x, y, color="black", linewidth=3)
-    plt.savefig(f"{filename}.svg", format="svg")
+    plt.savefig(f"{filename}.png", format="png")
