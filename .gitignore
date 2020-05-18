@@ -134,3 +134,4 @@ dmypy.json
 
 # Output files from analysis
 /index.html
+/projection.svg
