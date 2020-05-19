@@ -52,7 +52,7 @@ html_string = f"""
     <h2>Oil price today: {VALUE}</h2>
     {predictions.to_html()}
     <h2>Should you sell today? {sell_today}</h2>
-    <img src="projection.png" height="500" width ="265" alt="Projection plot missing" >
+    <img src="projection.png">
 """
 
 with open("index.html", "w") as file:

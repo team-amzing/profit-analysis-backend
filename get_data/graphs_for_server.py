@@ -6,10 +6,10 @@ from matplotlib import pyplot as plt
 
 def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions):
     """
-    Reads a pandas dataframe with all dates as datetime objects(!), and returns an .SVG
+    Reads a pandas dataframe with all dates as datetime objects(!), and returns an .png
     that contains the predicted values for the next few days, along with the profit
     one can expect if one waited until that day (as costs go up daily).
-    filename does not need to contain the .svg file extension.
+    filename does not need to contain the .png file extension.
     """
     # Read in files
     SERVER_URL = "http://35.204.193.240/"
