@@ -133,5 +133,5 @@ dmypy.json
 .idea/workspace.xml
 
 # Output files from analysis
-/index.html
-/projection.svg
+/frontend/index.html
+/frontend/projection.png
