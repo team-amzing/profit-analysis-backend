@@ -18,8 +18,8 @@ def sell_today(value_today, value_tomorrow, no_units, daily_cost, error_tomorrow
             count += 1
     confidence_value = count/difference
     if confidence_value > confidence:
-        profit_tomorrow = (value_tomorrow * no_units) - daily_cost
-        print(count, difference, confidence_value)
+        return profit_today < profit_tomorrow
+    else:
         return profit_today > profit_tomorrow
 
 
