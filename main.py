@@ -52,7 +52,10 @@ date_today = date.today()
 
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST, COVID_VALUES[-1])
 
-#TODAYS_ERROR = ((DATA_VALUES[-1]*10)*predictions['error'].iloc[0])
+if sell_today = 1:
+    print("sell sell sell")
+else:
+    print("nah")
 # Generate a plot and table for the server
 plot_to_file("projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
 
