@@ -18,9 +18,9 @@ def sell_today(value_today, value_tomorrow, no_units, daily_cost, error_tomorrow
             count += 1
     confidence_value = count/difference
     if confidence_value > confidence:
-        return profit_today < profit_tomorrow
+        return 1
     else:
-        return profit_today > profit_tomorrow
+        return 0
 
 
 def get_predictions(model, n_days, n_predictions, current_value, no_units, daily_cost, covid_today):
