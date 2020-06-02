@@ -52,7 +52,7 @@ date_today = date.today()
 
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST, COVID_VALUES[-1])
 
-if sell_today = 1:
+if sell_today == 1:
     print("sell sell sell")
 else:
     print("nah")
