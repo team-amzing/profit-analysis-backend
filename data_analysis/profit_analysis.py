@@ -4,11 +4,12 @@ for each prediction.
 """
 
 
-def sell_today(value_today, value_tomorrow, no_units, daily_cost, error_today):
+def sell_today(value_today, value_tomorrow, no_units, daily_cost, error_tomorrow):
     """Returns a boolean value for to indicate whether to sell today."""
-    max_profit_today = int((value_today + error_today)*no_units)
-    min_profit_today = int((value_today - error_today)*no_units)
-    print(max_profit_today)
+    cost_today = int(value_today + error_today)
+    max_cost_tomorrow = int((value_today + error_today)*no_units)
+    min_cost_tomorrow = int((value_today - error_today)*no_units)
+    print(max_cost_tomorrow, min_cost_tomorrow)
     profit_today = value_today * no_units
     profit_tomorrow = (value_tomorrow * no_units) - daily_cost
     return profit_today > profit_tomorrow
