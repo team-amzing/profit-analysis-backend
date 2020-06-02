@@ -67,7 +67,7 @@ html_string = f"""
 with open("index.html", "w") as file:
     file.write(html_string)
   
-print(TODAYS_ERROR)
+print(predictions)
 
 
 
