@@ -44,13 +44,13 @@ URL = "https://markets.businessinsider.com/commodities/oil-price?type=wti"
 COVID_DAYS = get_days()
 COVID_DATA, OUTBREAK_VALUE = corona_data(COVID_DAYS)
 OUTBREAK_VALUE = float(OUTBREAK_VALUE)
-DATA_VALUES = list(COVID_DATA["value"])
+COVID_VALUES = list(COVID_DATA["value"])
 # Current value of oil
 VALUE = get_current_value(URL)
 
 date_today = date.today()
 
-sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST, DATA_VALUES[-1])
+sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST, COVID_VALUES[-1])
 
 #TODAYS_ERROR = ((DATA_VALUES[-1]*10)*predictions['error'].iloc[0])
 # Generate a plot and table for the server
