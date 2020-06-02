@@ -11,10 +11,11 @@ def sell_today(value_today, value_tomorrow, no_units, daily_cost):
     return profit_today > profit_tomorrow
 
 
-def get_predictions(model, n_days, n_predictions, current_value, no_units, daily_cost):
+def get_predictions(model, n_days, n_predictions, current_value, no_units, daily_cost, covid_today):
     """Returns the predictions from a given model and a comparison between the best predicted value and
     the current value."""
     predictions = model(n_days, n_predictions, current_value)
     next_value = predictions.predicted_value[0]
+    todays_error = 
     return sell_today(current_value, next_value, no_units, daily_cost), predictions
 
