@@ -51,7 +51,7 @@ COVID_DAYS = get_days()
 COVID_DATA, OUTBREAK_VALUE = corona_data(COVID_DAYS)
 OUTBREAK_VALUE = float(OUTBREAK_VALUE)
 DATA_VALUES = list(COVID_DATA["value"])
-NUM_COVID = covid_pred(COVID_DAYS, DATA_VALUES, OUTBREAK_VALUE)
+TODAYS_ERROR = ((DATA_VALUES[-1]*10)*predictions['error'].iloc[0])
 # Generate a plot and table for the server
 plot_to_file("projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
 
@@ -66,5 +66,7 @@ html_string = f"""
 with open("index.html", "w") as file:
     file.write(html_string)
   
-print(predictions)
-print(DATA_VALUES[-1])
+print(TODAYS_ERROR)
+
+
+
