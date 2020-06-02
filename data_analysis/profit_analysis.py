@@ -6,8 +6,8 @@ for each prediction.
 
 def sell_today(value_today, value_tomorrow, no_units, daily_cost, error_today):
     """Returns a boolean value for to indicate whether to sell today."""
-    max_profit_today = (value_today + error_today)*no_units
-    min_profit_today = (value_today - error_today)*no_units
+    max_profit_today = int((value_today + error_today)*no_units)
+    min_profit_today = int((value_today - error_today)*no_units)
     print(max_profit_today)
     profit_today = value_today * no_units
     profit_tomorrow = (value_tomorrow * no_units) - daily_cost
