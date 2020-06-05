@@ -5,7 +5,7 @@ import os
 from datetime import date
 from data_analysis.price_prediction import model_arima
 from data_analysis.profit_analysis import get_predictions
-
+from data_analysis.price_prediction import model_prophet
 from frontend.graphs_for_server import plot_to_file
 from get_data.get_data import get_current_value
 from get_data.import_data import addTodaysDateToMacrotrends
@@ -19,7 +19,8 @@ file = os.path.join(THIS_FOLDER, 'get_data/macrotrends_data.csv')
 addTodaysDateToMacrotrends(file)
 
 # Model choice for analysis
-MODEL = model_arima
+#MODEL = model_arima
+MODEL = model_prophet
 
 # Constants for model parameters
 TRAINING_DAYS = 2000
