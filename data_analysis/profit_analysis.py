@@ -8,11 +8,12 @@ def sell_today(value_today, value_tomorrow, no_units, daily_cost, error_tomorrow
     """Returns a boolean value for to indicate whether to sell today."""
     confidence = 0.8 # 80%
     profit_today = value_today * no_units
-    max_cost_tomorrow = int(value_tomorrow + error_tomorrow)
-    min_cost_tomorrow = int(value_tomorrow - error_tomorrow)
+    max_cost_tomorrow = value_tomorrow + error_tomorrow
+    min_cost_tomorrow = value_tomorrow - error_tomorrow
     difference = max_cost_tomorrow - min_cost_tomorrow
     count = 0
-    for ii in range(min_cost_tomorrow, max_cost_tomorrow + 1):
+    print(max_cost_tomorrow, min_cost_tomorrow)
+    for ii in range(int(min_cost_tomorrow), int(max_cost_tomorrow + 1)):
         profit_tomorrow = cost(no_units, (min_cost_tomorrow + ii), daily_cost)
         if profit_tomorrow > profit_today:
             count += 1
