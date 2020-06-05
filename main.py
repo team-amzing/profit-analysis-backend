@@ -51,8 +51,8 @@ VALUE = get_current_value(URL)
 date_today = date.today()
 
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST, COVID_VALUES[-1])
-
-if sell_today == 1:
+print(sell_today)
+if sell_today == 1
     print("Sell Sell Sell")
 else:
     print("nah")
@@ -69,7 +69,3 @@ html_string = f"""
 
 with open("index.html", "w") as file:
     file.write(html_string)
-  
-
-
-
