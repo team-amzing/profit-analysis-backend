@@ -37,14 +37,7 @@ def call_macro(n_days, file):
     """Calls the API using the given API key, and returns the last n_days worth
     of WTI oil price data."""
     df = pd.read_csv(file)
-    return df.iloc[-n_days:]
-
-# def get_current_value():
-#     """Webscraper to return the current market value for WTI oil."""
-
-#     page = requests.get(
-#         "https://markets.businessinsider.com/commodities/oil-price?type=wti"
-#     )
-#     soup = BeautifulSoup(page.text, "html.parser")
-#     current_prices = soup.find(class_="push-data")
-#     return float(str(current_prices.next))
+    if n_days > 0:
+        return df.iloc[-n_days:]
+    else:
+        return df
