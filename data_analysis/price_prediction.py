@@ -47,17 +47,20 @@ def model_prophet(n_days, n_predictions, current_value):
             i = next_20_values[(next_20_values.ds == date)].index
             next_20_values = next_20_values.drop(i)
 
-    error = next_20_values.yhat_upper.head(n_predictions) - next_20_values.yhat_lower.head(n_predictions)
+    #error = next_20_values.yhat_upper.head(n_predictions) - next_20_values.yhat_lower.head(n_predictions)
     #N_predictions(R) = Returned
     n_predictionsR = next_20_values.head(n_predictions)
     dates = n_predictionsR.ds.tolist()
     values = n_predictionsR.yhat.tolist()
-    error = (n_predictionsR.yhat_upper - n_predictionsR.yhat_lower).tolist()
+    error_upper = n_predictionsR.yhat_upper.tolist()
+    error_lower = n_predictionsR.yhat_lower.tolist()
+
     return pd.DataFrame(
         data={
             "date": dates,
             "predicted_value": values,
-            "error": error,
+            "error_upper": error_upper,
+            "error_lower": error_lower,
         }
     )
 
