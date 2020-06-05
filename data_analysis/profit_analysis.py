@@ -2,19 +2,19 @@
 Using the predictions created in price_prediction.py the profit margin is analysed
 for each prediction.
 """
-
+import numpy as np
 
 def sell_today(value_today, value_tomorrow, no_units, daily_cost, error_tomorrow):
-    """Returns a boolean value for to indicate whether to sell today."""
+    """Returns a boolean value for to indicate whether to sell today with a confidence of 80%."""
     confidence = 0.8 # 80%
     profit_today = value_today * no_units
-    max_cost_tomorrow = value_tomorrow + error_tomorrow
-    min_cost_tomorrow = value_tomorrow - error_tomorrow
+    max_cost_tomorrow = round((value_tomorrow + error_tomorrow), 3)
+    min_cost_tomorrow = round((value_tomorrow - error_tomorrow), 3)
     difference = max_cost_tomorrow - min_cost_tomorrow
     count = 0
-    print(max_cost_tomorrow, min_cost_tomorrow)
-    for ii in range(int(min_cost_tomorrow), int(max_cost_tomorrow + 1)):
-        profit_tomorrow = cost(no_units, (min_cost_tomorrow + ii), daily_cost)
+    value_array = values_array(min_cost_tomorrow, max_cost_tomorrow)
+    for ii in range(0, len(value_array)):
+        profit_tomorrow = (value_array[ii] * no_units) - daily_cost
         if profit_tomorrow > profit_today:
             count += 1
     confidence_value = count/difference
@@ -32,7 +32,7 @@ def get_predictions(model, n_days, n_predictions, current_value, no_units, daily
     error_tomorrow = predictions['error'].iloc[0]
     return sell_today(current_value, next_value, no_units, daily_cost, error_tomorrow), predictions
 
-def cost(no_units, value, daily_cost):
-    profit = (value * no_units) - daily_cost
-    return profit
-    
+def values_array(min_cost, max_cost):
+    """creates an array of numbers between max and min price to count."""
+    value_array = np.arange(min_cost, (max_cost+0.001), 0.001)
+    return value_array   

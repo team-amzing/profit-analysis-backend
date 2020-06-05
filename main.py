@@ -51,11 +51,6 @@ VALUE = get_current_value(URL)
 date_today = date.today()
 
 sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST, COVID_VALUES[-1])
-print(sell_today)
-if sell_today == False:
-    print("Sell Sell Sell")
-else:
-    print("nah")
 # Generate a plot and table for the server
 plot_to_file("projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
 
