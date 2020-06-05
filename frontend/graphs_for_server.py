@@ -32,7 +32,7 @@ def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions)
         )  # Took %Y, year, out
         gross_labels.append(f'{predictions["predicted_value"].values[index]:.2f}')
 
-    font = {"family": "serif", "weight": "normal", "size": 12}
+    font = {"family": "serif", "weight": "normal", "size": 9}
 
     matplotlib.rc("font", **font)
 
