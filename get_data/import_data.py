@@ -13,7 +13,7 @@ def addTodaysDateToMacrotrends(file):
     colNames = df.columns
     time = datetime.now()
     #dd/mm/YY
-    todays_date = today.strftime("%d/%m/%Y")
+    todays_date = today.strftime("%Y-%m-%d")
     current_time = time.strftime("%H:%M:%S")
     current_time_to_int = int(current_time[:2])
     lastRowOnCSV = (df.tail(1)['date']).to_string(index=False).strip()
