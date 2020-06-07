@@ -18,7 +18,7 @@ def addTodaysDateToMacrotrends(file):
     current_time_to_int = int(current_time[:2])
     lastRowOnCSV = (df.tail(1)['date']).to_string(index=False).strip()
     #Failsafe 1: Only update the data after closing time (6pm)
-    if current_time_to_int >= 18:
+    if current_time_to_int >= 22:
         #Failsafe 2: Only update the data if the data does not already exist on the csv.
         if todays_date != lastRowOnCSV:
             todays_price = get_current_value(URL)
