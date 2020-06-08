@@ -26,7 +26,8 @@ def get_predictions(model, n_days, n_predictions, current_value, no_units, daily
     the current value."""
     predictions = model(n_days, n_predictions, current_value)
     next_value = predictions.predicted_value[0]
-    todays_error = 10 * covid_today
+    todays_error = covid_today
+    print(todays_error)
     predictions['error'] = predictions['error'] * todays_error
     error_tomorrow = predictions['error'].iloc[0]
     return sell_today(current_value, next_value, no_units, daily_cost, error_tomorrow), predictions
