@@ -31,15 +31,14 @@ def model_prophet(n_days, n_predictions, current_value):
                           'lower_window': 0,
                           'upper_window': 1,}))
 
-    model = Prophet(holidays=holidaysUS, daily_seasonality=False).fit(df_pred)
+    model = Prophet(holidays=holidaysUS, daily_seasonality=False, interval_width=0.60).fit(df_pred)
     
     future = model.make_future_dataframe(periods=365)
     forecast = model.predict(future)
-
-    #Less than or equal to current day + n_predictions
     tomorrows_date = (datetime.now() + timedelta(days=1))
+    #Less than or equal to current day + n_predictions
     max_dates = (tomorrows_date + timedelta(days=30))
-    forecast = forecast[(forecast['ds'] > tomorrows_date) & (forecast['ds'] <= max_dates)]
+    forecast = forecast[(forecast['ds'] > datetime.now()) & (forecast['ds'] <= max_dates)]
     next_20_values = forecast
     for date in next_20_values['ds']:
         week_no = date.weekday()
@@ -54,7 +53,6 @@ def model_prophet(n_days, n_predictions, current_value):
     values = n_predictionsR.yhat.tolist()
     error_upper = n_predictionsR.yhat_upper.tolist()
     error_lower = n_predictionsR.yhat_lower.tolist()
-
     return pd.DataFrame(
         data={
             "date": dates,
@@ -78,8 +76,8 @@ def model_arima(n_days, n_predictions, current_value):
     # Forecast, standard error, confidence region for a confidence of 95%
     forecast, error, conf = fitted.forecast(n_predictions, alpha=0.05)
     
-    dates = [current_time + timedelta(days=day) for day in range(1, n_predictions + 1)]
-    
+    dates = [current_time + timedelta(days=day) for day in range(0, n_predictions + 1)]
+    print (dates)
     return pd.DataFrame(
         data={
             "date": dates,

@@ -1,7 +1,9 @@
 import matplotlib
 import numpy as np
 import pandas as pd
+from datetime import datetime
 from matplotlib import pyplot as plt
+from get_data.get_data import get_current_value
 
 
 def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions):
@@ -12,10 +14,10 @@ def plot_to_file(filename, predictions, sell_today, todays_price, n_predictions)
     filename does not need to contain the .png file extension.
     """
     # Read in files
-    SERVER_URL = "http://35.204.193.240/"
-
+    SERVER_URL = "localhost"
+    URL = "https://markets.businessinsider.com/commodities/oil-price?type=wti"
     # Window setup
-    tomorrows_price = predictions["predicted_value"][1]
+    tomorrows_price = predictions["predicted_value"][0]
     difference = str(tomorrows_price - todays_price)
 
     # Calculate axis labels
