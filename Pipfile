@@ -7,8 +7,6 @@ verify_ssl = true
 pytest = "==5.2.0"
 black = "==19.3b0"
 flake8 = "==3.7.8"
-Cython = "==0.29.19"
-pystan = "==2.17.1.0"
 ipdb = "==0.12.2"
 coverage = "==4.5.4"
 pre-commit = "==1.18.3"
@@ -22,6 +20,7 @@ tweepy = "==3.5.0"
 scipy = "==1.4.1"
 pandas = "==1.0.3"
 matplotlib = "==3.1.1"
+pystan = "==2.17.1.0"
 fbprophet = "==0.6"
 
 [requires]
