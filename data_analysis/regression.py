@@ -1,13 +1,13 @@
 import numpy as np
 from scipy.optimize import least_squares
 
-from get_data.coronadata import get_days, corona_data
+from get_data.corona_data import get_days, corona_data
 
 # Get data
 days = get_days()
 data, outbreak_value = corona_data(days)
 outbreak_value = float(outbreak_value)
-data_value = list(data["Value"])
+data_value = list(data["value"])
 
 
 def generate_data(t, A, sigma, omega, noise=0, n_outliers=0, random_state=0):
@@ -25,7 +25,7 @@ def fun(x, t, y):
     return x[0] * np.exp(-x[1] * t) * np.sin(x[2] * t) - y
 
 
-def covid_pred(days, data_value, outbreakValue):
+def covid_pred(days, data_value, outbreak_value):
     """ Creates a nonlinear regression and outputs a prediction for the next day """
     x_train = np.linspace(0, days, days)
     x_reg = np.linspace(0, days + 1, 300)

@@ -13,12 +13,12 @@ def addTodaysDateToMacrotrends(file):
     colNames = df.columns
     time = datetime.now()
     #dd/mm/YY
-    todays_date = today.strftime("%d/%m/%Y")
+    todays_date = today.strftime("%Y-%m-%d")
     current_time = time.strftime("%H:%M:%S")
     current_time_to_int = int(current_time[:2])
     lastRowOnCSV = (df.tail(1)['date']).to_string(index=False).strip()
     #Failsafe 1: Only update the data after closing time (6pm)
-    if current_time_to_int >= 18:
+    if current_time_to_int >= 22:
         #Failsafe 2: Only update the data if the data does not already exist on the csv.
         if todays_date != lastRowOnCSV:
             todays_price = get_current_value(URL)
@@ -37,14 +37,7 @@ def call_macro(n_days, file):
     """Calls the API using the given API key, and returns the last n_days worth
     of WTI oil price data."""
     df = pd.read_csv(file)
-    return df.iloc[-n_days:]
-
-# def get_current_value():
-#     """Webscraper to return the current market value for WTI oil."""
-
-#     page = requests.get(
-#         "https://markets.businessinsider.com/commodities/oil-price?type=wti"
-#     )
-#     soup = BeautifulSoup(page.text, "html.parser")
-#     current_prices = soup.find(class_="push-data")
-#     return float(str(current_prices.next))
+    if n_days > 0:
+        return df.iloc[-n_days:]
+    else:
+        return df

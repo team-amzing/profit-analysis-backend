@@ -5,7 +5,9 @@ import os
 from datetime import date
 from data_analysis.price_prediction import model_arima
 from data_analysis.profit_analysis import get_predictions
-
+from data_analysis.price_prediction import model_prophet
+from data_analysis.regression import covid_pred
+from get_data.corona_data import get_days, corona_data
 from frontend.graphs_for_server import plot_to_file
 from get_data.get_data import get_current_value
 from get_data.import_data import addTodaysDateToMacrotrends
@@ -19,7 +21,8 @@ file = os.path.join(THIS_FOLDER, 'get_data/macrotrends_data.csv')
 addTodaysDateToMacrotrends(file)
 
 # Model choice for analysis
-MODEL = model_arima
+#MODEL = model_arima
+MODEL = model_prophet
 
 # Constants for model parameters
 TRAINING_DAYS = 2000
@@ -32,13 +35,17 @@ COST = 30000
 # URL for scraping the current value
 URL = "https://markets.businessinsider.com/commodities/oil-price?type=wti"
 
+COVID_DAYS = get_days()
+COVID_DATA, OUTBREAK_VALUE = corona_data(COVID_DAYS)
+OUTBREAK_VALUE = float(OUTBREAK_VALUE)
+COVID_VALUES = list(COVID_DATA["value"])
+
 # Current value of oil
 VALUE = get_current_value(URL)
 
 date_today = date.today()
 
-sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST)
-
+sell_today, predictions = get_predictions(MODEL, TRAINING_DAYS, PREDICTED_DAYS, VALUE, UNITS, COST, COVID_VALUES[-1])
 # Generate a plot and table for the server
 plot_to_file("frontend/projection", predictions, sell_today, VALUE, PREDICTED_DAYS)
 
