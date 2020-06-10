@@ -26,9 +26,3 @@ services:
       - 80:80
     volumes:
       - .:/code/
-  gcc:
-    build:
-      context: ./
-      dockerfile: Dockerfile-gcc
-    image: gcc
-
